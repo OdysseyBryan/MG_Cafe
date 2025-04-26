@@ -1,0 +1,511 @@
+:root {
+    --dark-green: #1B3B2F;
+    --gold: #D4AF37;
+    --coffee-brown: #6F4E37;
+    --cream-white: #F9F5EF;
+    --charcoal: #2E2E2E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cream-white);
+    color: var(--charcoal);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--dark-green);
+    letter-spacing: 1px;
+}
+
+/* Search Bar Styles */
+.search-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: 2px solid var(--gold);
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    border-color: var(--coffee-brown);
+}
+
+/* Recipe Cards Container */
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Recipe Card Styles */
+.recipe-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: none;
+}
+
+.recipe-card.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: var(--dark-green);
+    color: white;
+    padding: 20px;
+}
+
+.recipe-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.recipe-category {
+    font-size: 1rem;
+    opacity: 0.9;
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: var(--gold);
+    color: var(--charcoal);
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.drink-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.drink-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--cream-white);
+    color: var(--charcoal);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drink-btn.active {
+    background-color: var(--coffee-brown);
+    color: white;
+}
+
+.procedure-title {
+    font-size: 1.3rem;
+    color: var(--dark-green);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.procedure-steps {
+    padding-left: 20px;
+}
+
+.procedure-steps li {
+    margin-bottom: 10px;
+}
+
+.no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 50px;
+    color: var(--coffee-brown);
+    font-size: 1.2rem;
+    display: none;
+}
+
+.no-results.visible {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .recipes-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-bar {
+        padding: 12px 20px;
+    }
+}
+
+/* Add these to your existing styles.css file */
+
+.toggle-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.toggle-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toggle-label {
+    font-size: 1rem;
+    color: var(--dark-green);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.milk-options {
+    display: flex;
+    gap: 10px;
+}
+
+.milk-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--cream-white);
+    color: var(--charcoal);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.milk-btn.active {
+    background-color: var(--coffee-brown);
+    color: white;
+}
+
+.milk-procedure {
+    display: none;
+}
+
+.milk-procedure.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Calculator Styles */
+.tool-category {
+    font-size: 1rem;
+    opacity: 0.9;
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: var(--gold);
+    color: var(--charcoal);
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.calc-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.calc-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--cream-white);
+    color: var(--charcoal);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calc-btn.active {
+    background-color: var(--coffee-brown);
+    color: white;
+}
+
+.calc-procedure {
+    display: none;
+}
+
+.calc-procedure.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.cash-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cash-input-group label {
+    font-weight: 500;
+    color: var(--dark-green);
+}
+
+.cash-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 120px;
+}
+
+.check-mark {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.denomination-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.denomination-table th, 
+.denomination-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.denomination-table th {
+    background-color: var(--cream-white);
+    color: var(--dark-green);
+}
+
+.denom-input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.denom-total, .grand-total {
+    font-weight: 500;
+}
+
+.grand-total {
+    color: var(--dark-green);
+    font-size: 1.1rem;
+}
+
+/* Add to styles.css */
+.temp-procedure {
+    display: none;
+}
+
+.temp-procedure.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Closing Calculator Styles */
+.sales-container, .expenses-container, .gcash-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--cream-white);
+    border-radius: 8px;
+}
+
+.gcash-row, .expense-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.add-gcash-btn, .add-expense-btn, .remove-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-gcash-btn, .add-expense-btn {
+    background-color: var(--gold);
+    color: var(--charcoal);
+}
+
+.remove-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.add-gcash-btn:hover, .add-expense-btn:hover {
+    background-color: var(--coffee-brown);
+    color: white;
+}
+
+.remove-btn:hover {
+    background-color: #ff5252;
+}
+
+.net-sales-check, .total-sales-check {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.denomination-table tfoot tr:last-child td {
+    border-top: 2px solid var(--gold);
+}
+
+/* Update these styles in your styles.css */
+
+/* Make all input boxes consistent */
+.cash-input, 
+.gcash-input, 
+.expense-input, 
+.closing-denom-input,
+.denom-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 120px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* Specific width for denomination inputs */
+.closing-denom-input,
+.denom-input {
+    width: 80px; /* Slightly narrower for denomination inputs */
+}
+
+/* Focus state for all inputs */
+.cash-input:focus, 
+.gcash-input:focus, 
+.expense-input:focus, 
+.closing-denom-input:focus,
+.denom-input:focus {
+    border-color: var(--gold);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+/* Container adjustments for alignment */
+.gcash-row, 
+.expense-row,
+.denomination-table td:nth-child(2) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Button adjustments to match style */
+.add-gcash-btn, 
+.add-expense-btn, 
+.remove-btn {
+    padding: 8px 12px;
+    height: 36px; /* Match input height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Table cell specific styling */
+.denomination-table td {
+    vertical-align: middle;
+    padding: 8px 12px;
+}
+
+/* Quantity input cells */
+.denomination-table td:nth-child(2) {
+    padding-left: 0;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.filter-dropdown {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 2px solid var(--gold);
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    color: var(--charcoal);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.filter-dropdown:focus {
+    border-color: var(--coffee-brown);
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+}

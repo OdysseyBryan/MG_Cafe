@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MG Cafe</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: var(--cream-white);
+    }
+    .login-container {
+      text-align: center;
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .login-logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .login-title {
+      font-size: 2rem;
+      color: var(--dark-green);
+      margin-bottom: 30px;
+    }
+    .login-input {
+      display: block;
+      margin: 15px auto;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 25px;
+      border: 2px solid var(--gold);
+      outline: none;
+      width: 250px;
+    }
+    .login-input:focus {
+      border-color: var(--coffee-brown);
+    }
+    .login-btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      background-color: var(--coffee-brown);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .login-btn:active {
+      background-color: var(--dark-green);
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <div class="login-container">
+    <img src="logo.png" alt="MG Cafe Logo" class="login-logo">
+    <h1 class="login-title">MG Cafe</h1>
+
+    <input type="text" id="username" class="login-input" placeholder="Username">
+    <input type="password" id="password" class="login-input" placeholder="Password">
+    <button class="login-btn" id="loginBtn">Login</button>
+  </div>
+
+  <!-- Obfuscated login script -->
+  <script>
+    // Prevent common keys (F12, Ctrl+Shift+I)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+        e.preventDefault();
+      }
+    });
+  
+    const loginBtn = document.getElementById('loginBtn');
+    let holdTimeout;
+  
+    loginBtn.addEventListener('mousedown', function () {
+      holdTimeout = setTimeout(function () {
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+  
+        // Updated Obfuscated check
+        (function () {
+          let _u = atob('TUdDQUZFUEFTQVk='); // 'MGCAFEPASAY'
+          let _p = atob('MDMyMzIwMjU=');     // '03232025'
+  
+          if (u === _u && p === _p) {
+            window.location.href = "main.html";
+          } else {
+            alert("Access Denied");
+          }
+        })();
+      }, 1500); // Hold for 1.5 seconds
+    });
+  
+    loginBtn.addEventListener('mouseup', function () {
+      clearTimeout(holdTimeout);
+    });
+    loginBtn.addEventListener('mouseleave', function () {
+      clearTimeout(holdTimeout);
+    });
+  </script>
+  
+</body>
+</html>
