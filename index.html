@@ -1,111 +1,808 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MG Cafe</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: var(--cream-white);
-    }
-    .login-container {
-      text-align: center;
-      background-color: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-    .login-logo {
-      height: 60px;
-      margin-bottom: 10px;
-    }
-    .login-title {
-      font-size: 2rem;
-      color: var(--dark-green);
-      margin-bottom: 30px;
-    }
-    .login-input {
-      display: block;
-      margin: 15px auto;
-      padding: 10px 15px;
-      font-size: 1rem;
-      border-radius: 25px;
-      border: 2px solid var(--gold);
-      outline: none;
-      width: 250px;
-    }
-    .login-input:focus {
-      border-color: var(--coffee-brown);
-    }
-    .login-btn {
-      margin-top: 25px;
-      padding: 12px 25px;
-      font-size: 1rem;
-      font-weight: bold;
-      color: white;
-      background-color: var(--coffee-brown);
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .login-btn:active {
-      background-color: var(--dark-green);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MG Cafe</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body oncontextmenu="return false">
-  <div class="login-container">
-    <img src="logo.png" alt="MG Cafe Logo" class="login-logo">
-    <h1 class="login-title">MG Cafe</h1>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="MG Cafe Logo" class="logo">
+            <h1 class="title">MG Cafe</h1>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for recipes (Latte, Muffin, Opening, Closing, etc.)...">
+        </div>
+        
+        <div class="filter-container">
+            <label for="category-filter">Filter by Category:</label>
+            <select id="category-filter" class="filter-dropdown">
+                <option value="all">All</option>
+                <option value="drink">Drinks</option>
+                <option value="snack">Snacks</option>
+                <option value="tool">Tool</option>
+                <option value="procedure">Procedure</option>
+                <option value="dosdonts">Do's and Don'ts</option>
+                <option value="wifi">Wi-Fi Sharing</option>
+            </select>
+        </div>        
+        
+        <div class="recipes-container">
+            <div class="no-results">
+                <p>No recipes found. Try searching for "Latte", "Muffin", "Opening", or "Closing".</p>
+            </div>
+            <div class="recipe-card" data-name="calculator" data-category="tool">
+                <div class="card-header">
+                    <h2 class="recipe-name">Cash Calculator</h2>
+                    <span class="tool-category">Tool</span>
+                </div>
+                <div class="card-body">
+                    <div class="toggle-container">
+                        <div class="toggle-group">
+                            <h4 class="toggle-label">Calculator Type:</h4>
+                            <div class="calc-options">
+                                <button class="calc-btn active" data-type="opening">Opening</button>
+                                <button class="calc-btn" data-type="closing">Closing</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Opening Calculator -->
+                    <div class="calc-procedure active" data-calc-type="opening">
+                        <h3 class="procedure-title">Opening Cash Calculation</h3>
+                        
+                        <div class="cash-input-group">
+                            <label for="expected-petty-cash">Expected Petty Cash:</label>
+                            <input type="number" id="expected-petty-cash" class="cash-input" placeholder="Enter expected petty cash amount">
+                            <span class="check-mark"></span>
+                        </div>
+                        
+                        <table class="denomination-table">
+                            <thead>
+                                <tr>
+                                    <th>Denomination</th>
+                                    <th>Pieces</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1000 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="1000"></td>
+                                    <td class="denom-total" data-denom="1000">0</td>
+                                </tr>
+                                <tr>
+                                    <td>500 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="500"></td>
+                                    <td class="denom-total" data-denom="500">0</td>
+                                </tr>
+                                <tr>
+                                    <td>200 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="200"></td>
+                                    <td class="denom-total" data-denom="200">0</td>
+                                </tr>
+                                <tr>
+                                    <td>100 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="100"></td>
+                                    <td class="denom-total" data-denom="100">0</td>
+                                </tr>
+                                <tr>
+                                    <td>50 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="50"></td>
+                                    <td class="denom-total" data-denom="50">0</td>
+                                </tr>
+                                <tr>
+                                    <td>20 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="20"></td>
+                                    <td class="denom-total" data-denom="20">0</td>
+                                </tr>
+                                <tr>
+                                    <td>10 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="10"></td>
+                                    <td class="denom-total" data-denom="10">0</td>
+                                </tr>
+                                <tr>
+                                    <td>5 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="5"></td>
+                                    <td class="denom-total" data-denom="5">0</td>
+                                </tr>
+                                <tr>
+                                    <td>1 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="1"></td>
+                                    <td class="denom-total" data-denom="1">0</td>
+                                </tr>
+                                <tr>
+                                    <td>0.25 ×</td>
+                                    <td><input type="number" class="denom-input" data-multiplier="0.25"></td>
+                                    <td class="denom-total" data-denom="0.25">0</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"><strong>Petty Cash:</strong></td>
+                                    <td class="grand-total">0</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <!-- Add this inside the calculator card's closing section -->
+            <div class="calc-procedure" data-calc-type="closing">
+                <h3 class="procedure-title">Closing Calculator</h3>
+                
+                <div class="sales-container">
+                    <div class="cash-input-group">
+                        <label for="cash-sales">Sales on Cash:</label>
+                        <input type="number" id="cash-sales" class="cash-input" placeholder="Enter amount">
+                    </div>
+                    
+                    <div class="gcash-container">
+                        <h4>GCash Sales:</h4>
+                        <div class="gcash-inputs">
+                            <div class="gcash-row">
+                                <input type="number" class="gcash-input" placeholder="Enter GCash amount">
+                                <button class="add-gcash-btn">+</button>
+                            </div>
+                        </div>
+                        <div class="cash-input-group">
+                            <label>Total GCash Sales:</label>
+                            <span id="total-gcash-sales">0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cash-input-group">
+                        <label>Expected Net Sales:</label>
+                        <span id="net-sales">0.00</span>
+                        <span class="net-sales-check"></span>
+                    </div>
+                </div>
+                
+                <div class="expenses-container">
+                    <h4>Expenses:</h4>
+                    <div class="expense-inputs">
+                        <div class="expense-row">
+                            <input type="number" class="expense-input" placeholder="Enter expense amount">
+                            <button class="add-expense-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="cash-input-group">
+                        <label>Total Expenses:</label>
+                        <span id="total-expenses">0.00</span>
+                    </div>
+                </div>
+                
+                <h4>Cash Denomination:</h4>
+                <table class="denomination-table">
+                    <thead>
+                        <tr>
+                            <th>Denomination</th>
+                            <th>Pieces</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1000 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="1000"></td>
+                            <td class="closing-denom-total" data-denom="1000">0</td>
+                        </tr>
+                        <tr>
+                            <td>500 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="500"></td>
+                            <td class="closing-denom-total" data-denom="500">0</td>
+                        </tr>
+                        <tr>
+                            <td>200 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="200"></td>
+                            <td class="closing-denom-total" data-denom="200">0</td>
+                        </tr>
+                        <tr>
+                            <td>100 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="100"></td>
+                            <td class="closing-denom-total" data-denom="100">0</td>
+                        </tr>
+                        <tr>
+                            <td>50 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="50"></td>
+                            <td class="closing-denom-total" data-denom="50">0</td>
+                        </tr>
+                        <tr>
+                            <td>20 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="20"></td>
+                            <td class="closing-denom-total" data-denom="20">0</td>
+                        </tr>
+                        <tr>
+                            <td>10 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="10"></td>
+                            <td class="closing-denom-total" data-denom="10">0</td>
+                        </tr>
+                        <tr>
+                            <td>5 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="5"></td>
+                            <td class="closing-denom-total" data-denom="5">0</td>
+                        </tr>
+                        <tr>
+                            <td>1 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="1"></td>
+                            <td class="closing-denom-total" data-denom="1">0</td>
+                        </tr>
+                        <tr>
+                            <td>0.25 ×</td>
+                            <td><input type="number" class="closing-denom-input" data-multiplier="0.25"></td>
+                            <td class="closing-denom-total" data-denom="0.25">0</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>Total Cash on Hand:</strong></td>
+                            <td class="onhand-cash-total">0</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Total Cash Including Expenses:</strong></td>
+                            <td class="cash-with-expenses">0</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Official Net Sales:</strong></td>
+                            <td class="total-sales-gcash">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+                </div>
+            </div>
+<!-- Do's Card -->
+<div class="recipe-card" data-name="do's" data-category="dosdonts">
+    <div class="card-header">
+        <h2 class="recipe-name">Do's</h2>
+        <span class="recipe-category">Do's and Don'ts</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">Barista Guidelines - What To Do</h3>
+        <ul class="procedure-steps">
+            <li>Greet every customer with a smile</li>
+            <li>Keep your workstation clean and organized</li>
+            <li>Restock supplies proactively</li>
+            <li>Confirm all orders before serving</li>
+            <li>Be polite and professional at all times</li>
+        </ul>
+    </div>
+</div>
 
-    <input type="text" id="username" class="login-input" placeholder="Username">
-    <input type="password" id="password" class="login-input" placeholder="Password">
-    <button class="login-btn" id="loginBtn">Login</button>
-  </div>
+<!-- Don'ts Card -->
+<div class="recipe-card" data-name="don'ts" data-category="dosdonts">
+    <div class="card-header">
+        <h2 class="recipe-name">Don'ts</h2>
+        <span class="recipe-category">Do's and Don'ts</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">Barista Guidelines - What Not To Do</h3>
+        <ul class="procedure-steps">
+            <li>Don’t argue with customers</li>
+            <li>Don’t leave machines dirty after use</li>
+            <li>Don’t use your phone during shifts</li>
+            <li>Don’t ignore the queue</li>
+            <li>Don’t serve drinks without confirming the order</li>
+        </ul>
+    </div>
+</div>
 
-  <!-- Obfuscated login script -->
-  <script>
-    // Prevent common keys (F12, Ctrl+Shift+I)
-    document.addEventListener('keydown', function(e) {
-      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
-        e.preventDefault();
-      }
-    });
-  
-    const loginBtn = document.getElementById('loginBtn');
-    let holdTimeout;
-  
-    loginBtn.addEventListener('mousedown', function () {
-      holdTimeout = setTimeout(function () {
-        const u = document.getElementById('username').value;
-        const p = document.getElementById('password').value;
-  
-        // Updated Obfuscated check
-        (function () {
-          let _u = atob('TUdDQUZFUEFTQVk='); // 'MGCAFEPASAY'
-          let _p = atob('MDMyMzIwMjU=');     // '03232025'
-  
-          if (u === _u && p === _p) {
-            window.location.href = "main.html";
-          } else {
-            alert("Access Denied");
-          }
-        })();
-      }, 1500); // Hold for 1.5 seconds
-    });
-  
-    loginBtn.addEventListener('mouseup', function () {
-      clearTimeout(holdTimeout);
-    });
-    loginBtn.addEventListener('mouseleave', function () {
-      clearTimeout(holdTimeout);
-    });
-  </script>
-  
+<!-- Wi-Fi Sharing Card -->
+<div class="recipe-card" data-name="wifi" data-category="wifi">
+    <div class="card-header">
+        <h2 class="recipe-name">Wi-Fi Sharing</h2>
+        <span class="recipe-category">Wi-Fi Sharing</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">How to Share Wi-Fi with Customers</h3>
+        <ol class="procedure-steps">
+            <li>Politely ask the customer if they need Wi-Fi access</li>
+            <li>Give them the official Wi-Fi name (SSID): <strong>MG_Cafe_Wifi</strong></li>
+            <li>Provide the password: <strong>mgcafe2025</strong></li>
+            <li>Remind them to avoid streaming or downloading large files</li>
+            <li>Disconnect inactive users after 1 hour if needed</li>
+        </ol>
+    </div>
+</div>
+
+<div class="recipe-card" data-name="opening" data-category="procedure">
+    <div class="card-header">
+        <h2 class="recipe-name">Opening Procedures</h2>
+        <span class="recipe-category">Shop Procedure</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">Morning Routine:</h3>
+        <ol class="procedure-steps">
+            <li>Unlock doors and disarm security system</li>
+            <li>Turn on all necessary lights and equipment</li>
+            <li>Prepare espresso machine (fill water, warm up)</li>
+            <li>Check inventory and restock as needed</li>
+            <li>Set up pastry display case</li>
+            <li>Prepare coffee brewers and tea stations</li>
+            <li>Count register float and prepare till</li>
+            <li>Wipe down all surfaces and ensure cleanliness</li>
+            <li>Put out sidewalk sign and open curtains</li>
+            <li>Turn on music system at appropriate volume</li>
+        </ol>
+    </div>
+</div>
+
+<div class="recipe-card" data-name="closing" data-category="procedure">
+    <div class="card-header">
+        <h2 class="recipe-name">Closing Procedures</h2>
+        <span class="recipe-category">Shop Procedure</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">Evening Routine:</h3>
+        <ol class="procedure-steps">
+            <li>Begin closing procedures 30 minutes before actual closing</li>
+            <li>Start shutting down equipment not in use</li>
+            <li>Clean espresso machine and steam wands</li>
+            <li>Dispose of any expired food items</li>
+            <li>Package remaining pastries for next day or donation</li>
+            <li>Wipe down all counters, tables, and surfaces</li>
+            <li>Sweep and mop floors</li>
+            <li>Take out trash and recycling</li>
+            <li>Count register and prepare deposit</li>
+            <li>Set alarm system and lock all doors</li>
+            <li>Complete closing checklist and sign off</li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- Add this with your other recipe cards -->
+
+            
+            <!-- Sample Recipe Cards -->
+            <!-- Group 1: Drinks with Hot/Cold Options -->
+
+<!-- Sugar Free Black -->
+<div class="recipe-card" data-name="sugar free black" data-category="drink">
+    <div class="card-header">
+        <h2 class="recipe-name">Sugar Free Black</h2>
+        <span class="recipe-category">Drink</span>
+    </div>
+    <div class="card-body">
+        <div class="toggle-container">
+            <div class="toggle-group">
+                <h4 class="toggle-label">Temperature:</h4>
+                <div class="drink-options">
+                    <button class="drink-btn active" data-type="hot">Hot</button>
+                    <button class="drink-btn" data-type="cold">Cold</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Regular milk instructions -->
+        <div class="milk-procedure active" data-milk-type="regular">
+            <h3 class="procedure-title">Procedure (Water):</h3>
+            <ol class="procedure-steps">
+                <li>Brew an espresso</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a splash of regular milk if requested</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+        
+        <!-- Oat milk instructions -->
+        <div class="milk-procedure" data-milk-type="oatmilk">
+            <h3 class="procedure-title">Procedure (Oat Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh black coffee with no sugar added</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a splash of oat milk if requested</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+        
+        <!-- Oat choco instructions -->
+        <div class="milk-procedure" data-milk-type="oatchoco">
+            <h3 class="procedure-title">Procedure (Oat Choco):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh black coffee with no sugar added</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a small amount of oat milk and sugar-free chocolate syrup</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- Sugar Free Brown -->
+<div class="recipe-card" data-name="sugar free brown" data-category="drink">
+    <div class="card-header">
+        <h2 class="recipe-name">Sugar Free Brown</h2>
+        <span class="recipe-category">Drink</span>
+    </div>
+    <div class="card-body">
+        <div class="toggle-container">
+            <div class="toggle-group">
+                <h4 class="toggle-label">Temperature:</h4>
+                <div class="drink-options">
+                    <button class="drink-btn active" data-type="hot">Hot</button>
+                    <button class="drink-btn" data-type="cold">Cold</button>
+                </div>
+            </div>
+            
+            <div class="toggle-group">
+                <h4 class="toggle-label">Milk Type:</h4>
+                <div class="milk-options">
+                    <button class="milk-btn active" data-milk="regular">Regular</button>
+                    <button class="milk-btn" data-milk="oatmilk">Oat Milk</button>
+                    <button class="milk-btn" data-milk="oatchoco">Oat Choco</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Regular milk instructions -->
+        <div class="milk-procedure active" data-milk-type="regular">
+            <h3 class="procedure-title">Procedure (Regular Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh coffee with no sugar added</li>
+                <li>Add regular milk to achieve light brown color (about 30ml)</li>
+                <li>For hot: Serve immediately at 75-80°C (167-176°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+        
+        <!-- Oat milk instructions -->
+        <div class="milk-procedure" data-milk-type="oatmilk">
+            <h3 class="procedure-title">Procedure (Oat Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh coffee with no sugar added</li>
+                <li>Add oat milk to achieve light brown color (about 40ml)</li>
+                <li>For hot: Serve immediately at 75-80°C (167-176°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+        
+        <!-- Oat choco instructions -->
+        <div class="milk-procedure" data-milk-type="oatchoco">
+            <h3 class="procedure-title">Procedure (Oat Choco):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh coffee with no sugar added</li>
+                <li>Add oat milk and sugar-free chocolate syrup (15ml)</li>
+                <li>For hot: Serve immediately at 75-80°C (167-176°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Offer sweetener packets on the side</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- Muscovado Black -->
+<div class="recipe-card" data-name="muscovado black" data-category="drink">
+    <div class="card-header">
+        <h2 class="recipe-name">Muscovado Black</h2>
+        <span class="recipe-category">Drink</span>
+    </div>
+    <div class="card-body">
+        <div class="toggle-container">
+            <div class="toggle-group">
+                <h4 class="toggle-label">Temperature:</h4>
+                <div class="drink-options">
+                    <button class="drink-btn active" data-type="hot">Hot</button>
+                    <button class="drink-btn" data-type="cold">Cold</button>
+                </div>
+            </div>
+            
+            <div class="toggle-group">
+                <h4 class="toggle-label">Milk Type:</h4>
+                <div class="milk-options">
+                    <button class="milk-btn active" data-milk="regular">Regular</button>
+                    <button class="milk-btn" data-milk="oatmilk">Oat Milk</button>
+                    <button class="milk-btn" data-milk="oatchoco">Oat Choco</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Regular milk instructions -->
+        <div class="milk-procedure active" data-milk-type="regular">
+            <h3 class="procedure-title">Procedure (Regular Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh black coffee</li>
+                <li>Add 15g of muscovado sugar and stir until dissolved</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a splash of regular milk if requested</li>
+            </ol>
+        </div>
+        
+        <!-- Oat milk instructions -->
+        <div class="milk-procedure" data-milk-type="oatmilk">
+            <h3 class="procedure-title">Procedure (Oat Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh black coffee</li>
+                <li>Add 15g of muscovado sugar and stir until dissolved</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a splash of oat milk if requested</li>
+            </ol>
+        </div>
+        
+        <!-- Oat choco instructions -->
+        <div class="milk-procedure" data-milk-type="oatchoco">
+            <h3 class="procedure-title">Procedure (Oat Choco):</h3>
+            <ol class="procedure-steps">
+                <li>Brew fresh black coffee</li>
+                <li>Add 15g of muscovado sugar and stir until dissolved</li>
+                <li>For hot: Serve immediately at 82-88°C (180-190°F)</li>
+                <li>For cold: Let cool and serve over ice</li>
+                <li>Add a splash of oat milk and 10ml chocolate syrup</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- Group 2: Drinks with Hot/Cold/Frappe Options -->
+
+<!-- Hazelnut -->
+<div class="recipe-card" data-name="hazelnut" data-category="drink">
+    <div class="card-header">
+        <h2 class="recipe-name">Hazelnut</h2>
+        <span class="recipe-category">Drink</span>
+    </div>
+    <div class="card-body">
+        <div class="toggle-container">
+            <div class="toggle-group">
+                <h4 class="toggle-label">Temperature:</h4>
+                <div class="drink-options">
+                    <button class="drink-btn active" data-type="hot">Hot</button>
+                    <button class="drink-btn" data-type="cold">Cold</button>
+                    <button class="drink-btn" data-type="frappe">Frappe</button>
+                </div>
+            </div>
+            
+            <div class="toggle-group">
+                <h4 class="toggle-label">Milk Type:</h4>
+                <div class="milk-options">
+                    <button class="milk-btn active" data-milk="regular">Regular</button>
+                    <button class="milk-btn" data-milk="oatmilk">Oat Milk</button>
+                    <button class="milk-btn" data-milk="oatchoco">Oat Choco</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Regular milk instructions -->
+        <div class="milk-procedure active" data-milk-type="regular">
+            <!-- Hot Procedure -->
+            <div class="temp-procedure active" data-temp-type="hot">
+                <h3 class="procedure-title">Hot Procedure (Regular Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and stir</li>
+                    <li>Steam 180ml of regular milk to 65°C (150°F) with microfoam</li>
+                    <li>Pour milk into espresso in a circular motion</li>
+                    <li>Hold back foam with spoon for first 3/4 of pour</li>
+                    <li>Add remaining foam on top</li>
+                    <li>Optional: dust with cinnamon or cocoa powder</li>
+                </ol>
+            </div>
+            
+            <!-- Cold Procedure -->
+            <div class="temp-procedure" data-temp-type="cold">
+                <h3 class="procedure-title">Cold Procedure (Regular Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and stir</li>
+                    <li>Add 180ml cold regular milk (no frothing)</li>
+                    <li>Stir gently to combine</li>
+                    <li>Add ice cubes to fill glass</li>
+                    <li>Optional: top with whipped cream</li>
+                </ol>
+            </div>
+            
+            <!-- Frappe Procedure -->
+            <div class="temp-procedure" data-temp-type="frappe">
+                <h3 class="procedure-title">Frappe Procedure (Regular Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup</li>
+                    <li>Combine with 150ml regular milk and 2 cups of ice</li>
+                    <li>Blend until smooth and frothy</li>
+                    <li>Pour into serving glass</li>
+                    <li>Top with whipped cream and hazelnut drizzle</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Oat milk instructions -->
+        <div class="milk-procedure" data-milk-type="oatmilk">
+            <!-- Hot Procedure -->
+            <div class="temp-procedure active" data-temp-type="hot">
+                <h3 class="procedure-title">Hot Procedure (Oat Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and stir</li>
+                    <li>Steam 180ml of oat milk to 60°C (140°F) - creates less foam</li>
+                    <li>Pour milk into espresso gently</li>
+                    <li>Oat milk may not create latte art as easily</li>
+                    <li>Optional: sprinkle with cinnamon</li>
+                </ol>
+            </div>
+            
+            <!-- Cold Procedure -->
+            <div class="temp-procedure" data-temp-type="cold">
+                <h3 class="procedure-title">Cold Procedure (Oat Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and stir</li>
+                    <li>Add 180ml cold oat milk (no frothing)</li>
+                    <li>Stir gently to combine</li>
+                    <li>Add ice cubes to fill glass</li>
+                    <li>Optional: top with non-dairy whipped cream</li>
+                </ol>
+            </div>
+            
+            <!-- Frappe Procedure -->
+            <div class="temp-procedure" data-temp-type="frappe">
+                <h3 class="procedure-title">Frappe Procedure (Oat Milk):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup</li>
+                    <li>Combine with 150ml oat milk and 2 cups of ice</li>
+                    <li>Blend until smooth</li>
+                    <li>Pour into serving glass</li>
+                    <li>Top with non-dairy whipped cream</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Oat choco instructions -->
+        <div class="milk-procedure" data-milk-type="oatchoco">
+            <!-- Hot Procedure -->
+            <div class="temp-procedure active" data-temp-type="hot">
+                <h3 class="procedure-title">Hot Procedure (Oat Choco):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and 15ml chocolate syrup</li>
+                    <li>Steam 180ml of oat milk to 60°C (140°F)</li>
+                    <li>Pour milk into espresso and syrup mixture</li>
+                    <li>Stir gently to combine chocolate</li>
+                    <li>Optional: dust with cocoa powder</li>
+                </ol>
+            </div>
+            
+            <!-- Cold Procedure -->
+            <div class="temp-procedure" data-temp-type="cold">
+                <h3 class="procedure-title">Cold Procedure (Oat Choco):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and 15ml chocolate syrup</li>
+                    <li>Add 180ml cold oat milk (no frothing)</li>
+                    <li>Stir vigorously to combine chocolate</li>
+                    <li>Add ice cubes to fill glass</li>
+                    <li>Optional: chocolate drizzle on top</li>
+                </ol>
+            </div>
+            
+            <!-- Frappe Procedure -->
+            <div class="temp-procedure" data-temp-type="frappe">
+                <h3 class="procedure-title">Frappe Procedure (Oat Choco):</h3>
+                <ol class="procedure-steps">
+                    <li>Pull a double shot of espresso (30ml)</li>
+                    <li>Add 20ml hazelnut syrup and 15ml chocolate syrup</li>
+                    <li>Combine with 150ml oat milk and 2 cups of ice</li>
+                    <li>Blend until smooth</li>
+                    <li>Pour into serving glass</li>
+                    <li>Top with chocolate drizzle and cocoa powder</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Group 3: Frappe-only drinks -->
+
+<!-- Dark Mocha -->
+<div class="recipe-card" data-name="dark mocha" data-category="drink">
+    <div class="card-header">
+        <h2 class="recipe-name">Dark Mocha Frappe</h2>
+        <span class="recipe-category">Drink</span>
+    </div>
+    <div class="card-body">
+        <div class="toggle-container">
+            <div class="toggle-group">
+                <h4 class="toggle-label">Milk Type:</h4>
+                <div class="milk-options">
+                    <button class="milk-btn active" data-milk="regular">Regular</button>
+                    <button class="milk-btn" data-milk="oatmilk">Oat Milk</button>
+                    <button class="milk-btn" data-milk="oatchoco">Oat Choco</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Regular milk instructions -->
+        <div class="milk-procedure active" data-milk-type="regular">
+            <h3 class="procedure-title">Procedure (Regular Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Pull a double shot of espresso</li>
+                <li>Add 30ml dark chocolate syrup</li>
+                <li>Combine with 150ml regular milk and 2 cups of ice</li>
+                <li>Blend until smooth</li>
+                <li>Top with whipped cream and chocolate drizzle</li>
+                <li>Sprinkle with chocolate shavings before serving</li>
+            </ol>
+        </div>
+        
+        <!-- Oat milk instructions -->
+        <div class="milk-procedure" data-milk-type="oatmilk">
+            <h3 class="procedure-title">Procedure (Oat Milk):</h3>
+            <ol class="procedure-steps">
+                <li>Pull a double shot of espresso</li>
+                <li>Add 30ml dark chocolate syrup</li>
+                <li>Combine with 150ml oat milk and 2 cups of ice</li>
+                <li>Blend until smooth</li>
+                <li>Top with non-dairy whipped cream and chocolate drizzle</li>
+                <li>Sprinkle with chocolate shavings before serving</li>
+            </ol>
+        </div>
+        
+        <!-- Oat choco instructions -->
+        <div class="milk-procedure" data-milk-type="oatchoco">
+            <h3 class="procedure-title">Procedure (Oat Choco):</h3>
+            <ol class="procedure-steps">
+                <li>Pull a double shot of espresso</li>
+                <li>Add 25ml dark chocolate syrup and 15ml chocolate syrup</li>
+                <li>Combine with 150ml oat milk and 2 cups of ice</li>
+                <li>Blend until smooth</li>
+                <li>Top with non-dairy whipped cream and extra chocolate drizzle</li>
+                <li>Garnish with chocolate shavings and cocoa powder</li>
+            </ol>
+        </div>
+    </div>
+</div>
+            
+            <div class="recipe-card" data-name="blueberry muffin" data-category="snack">
+                <div class="card-header">
+                    <h2 class="recipe-name">Blueberry Muffin</h2>
+                    <span class="recipe-category">Muffin</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="procedure-title">Preparation:</h3>
+                    <ol class="procedure-steps">
+                        <li>Preheat oven to 200°C (400°F)</li>
+                        <li>Mix dry ingredients: flour, sugar, baking powder, salt</li>
+                        <li>In separate bowl, mix wet ingredients: milk, egg, melted butter</li>
+                        <li>Combine wet and dry ingredients, fold in blueberries</li>
+                        <li>Fill muffin cups 2/3 full</li>
+                        <li>Bake for 20-25 minutes until golden brown</li>
+                        <li>Cool on wire rack before serving</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Nachos Card -->
+<div class="recipe-card" data-name="nachos" data-category="snack">
+    <div class="card-header">
+        <h2 class="recipe-name">Nachos</h2>
+        <span class="recipe-category">Snacks</span>
+    </div>
+    <div class="card-body">
+        <h3 class="procedure-title">How to Prepare Nachos</h3>
+        <ul class="procedure-steps">
+            <li>Preheat oven to 180°C (350°F).</li>
+            <li>Arrange tortilla chips evenly on a serving plate or baking tray.</li>
+            <li>Sprinkle shredded cheese generously over the chips.</li>
+            <li>Add optional toppings like jalapeños, olives, or diced tomatoes.</li>
+            <li>Heat in oven for about 5 minutes or until cheese melts.</li>
+            <li>Drizzle with cheese sauce or sour cream (optional).</li>
+            <li>Serve warm and enjoy!</li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
